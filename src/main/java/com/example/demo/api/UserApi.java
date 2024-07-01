@@ -134,5 +134,5 @@ public class UserApi {
     public String confirm(@RequestParam("token") String token) {
         return userService.confirmToken(token);
     }
-    
+
 }

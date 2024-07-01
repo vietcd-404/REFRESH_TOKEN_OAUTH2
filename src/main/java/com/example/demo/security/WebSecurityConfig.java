@@ -1,5 +1,6 @@
 package com.example.demo.security;
 
+import com.example.demo.entity.UserRole;
 import com.example.demo.jwt.JwtAuthFilter;
 import com.example.demo.service.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,8 @@ public class WebSecurityConfig {
         http.cors().and().csrf().disable().authorizeHttpRequests()
                 .requestMatchers("/api/auth/**").permitAll() //cho phép vào không cần đăng nhập
                 .requestMatchers("/api/account/**").permitAll()
+//                .requestMatchers("/admin/**").hasAuthority(UserRole.ROLE_ADMIN.name())
+//                .requestMatchers("/users/**").hasAnyAuthority(UserRole.ROLE_ADMIN.name(),UserRole.ROLE_USER.name())
                 .anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
      //   http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
